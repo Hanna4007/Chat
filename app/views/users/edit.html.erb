@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <%= form_with model: @current_user do |form| %>
+    <p> <%= form.label :login %> 
+    <%= form.text_field :login, class: 'form-control' %> </p>
+
+    <p> <%= form.label :phone_number %> 
+    <%= form.text_field :phone_number, placeholder: '+380 xxx xx xx xx', class: 'form-control' %> </p>
+
+    <p> <%= form.label :password %> 
+    <%= form.password_field :password, class: 'form-control' %> </p>
+
+    <p> <%= form.label :password_confirmation %> 
+    <%= form.password_field :password_confirmation, class: 'form-control' %> </p>
+        
+    <%= form.submit "Save", class: 'btn bg-success rounded-0 my-2' %>
+  <% end %>
+</div>
