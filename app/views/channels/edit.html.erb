@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <h4>Edit channel</h4>
+  <%= form_with model: @channel do |form| %>
+    <p> <%= form.label :name %> 
+    <%= form.text_field :name, class: 'form-control' %> </p>
+ 	 
+   <p>
+    <%= form.radio_button :private, true %>
+    <%= form.label :private, 'Private' %>
+  </p>
+  <p>
+    <%= form.radio_button :private, false %>
+    <%= form.label :public, 'Public' %>
+  </p>
+      
+    <%= form.submit "Save", class: 'btn bg-warning-subtle rounded-0 my-2   ' %>
+  <% end %>
+</div>

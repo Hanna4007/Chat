@@ -15,11 +15,13 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning-subtle border border-primary sticky-top">
-      <div class="container-fluid bg-warning border border-primary rounded-left p-2 d-flex justify-content-between align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning-subtle border border-warning sticky-top">
+      <div class="container-fluid bg-warning border border-warning rounded-left p-2 d-flex justify-content-between align-items-center">
         <ul class="navbar-nav">
           <% if current_user.present? %>
             <li class="nav-item"> <%= link_to "Users", users_path, class: "nav-link" %> </li>
+            <li class="nav-item"> <%= link_to "Channels", channels_path, class: "nav-link" %> </li>
+            <li class="nav-item"> <%= link_to "New channel", new_channel_path, class: "nav-link" %> </li>
           <% end %>
         </ul>
         <ul class="navbar-nav">
@@ -28,7 +30,7 @@
               <a class="nav-link dropdown-toggle px-5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= "#{current_user.login}" %>
               </a>
-              <ul class="dropdown-menu border border-primary">
+              <ul class="dropdown-menu border border-warning-subtle">
                 <li> <%= link_to "Log out", session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'dropdown-item' %></li>
                 <li> <%= link_to "Edit profile", edit_user_path, class: 'dropdown-item' %></li>
               </ul>

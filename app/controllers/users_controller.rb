@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   
 def create
   create_user
-  session[:user_id]=@user.id
   if @user.valid?
+    session[:user_id]=@user.id
     redirect_to root_path
   else
     render :new, status: :unprocessable_entity

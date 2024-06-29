@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>  
+
+    <tbody>
+      <% @channels.each do |channel| %>
+        <tr>
+          <td><%= link_to "#{channel.name }", edit_channel_path(channel) %> </td>
+          <td><%= channel.private %></td>
+          <td><%= link_to 'Delete channel', channel_path(channel), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"}, class: 'btn bg-warning-subtle rounded-0' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
