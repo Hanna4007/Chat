@@ -2,6 +2,29 @@ class ChannelsController < ApplicationController
 
   def index
     @channels=Channel.all
+   
+    @channel_memberships = {}
+    @channels.each do |channel|
+      if current_user.channels.include?(channel)
+        @channel_memberships[channel.id] = current_user.memberships.find_by(channel_id: channel.id)
+      else
+        @channel_memberships[channel.id] = channel.memberships.new(user_id: current_user.id)
+      end
+    end
+  end
+
+  
+  def my_channels
+    @channels=current_user.channels
+    @my_channel_memberships = {}
+    @channels.each do |channel|
+      @my_channel_memberships[channel.id] = current_user.memberships.find_by(channel_id: channel.id)
+    end
+  end
+
+  def show
+    @channel=Channel.find(params[:id])
+    @memberships = @channel.memberships.all    
   end
 
   def new

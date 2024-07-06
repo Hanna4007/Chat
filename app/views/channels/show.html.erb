@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Login</th>
+        <th>Phone number</th>
+        <th>Admin status</th>
+      </tr>
+    </thead>  
+
+    <tbody>
+      <% @memberships.each do |membership| %>
+        <tr>
+          <td><%= membership.user.login %> </td>
+          <td><%= membership.user.phone_number %></td>
+          <td><%= membership.user.admin %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

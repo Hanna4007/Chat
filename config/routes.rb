@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[index new create]
   resource :user, only: %i[edit update]
   resource :session, only: %i[new create destroy] 
-  resources :channels
+  resources :channels do
+    resources :memberships
+  end
+  get 'my_channels', to: 'channels#my_channels'
 end
