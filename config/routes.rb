@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resource :session, only: %i[new create destroy] 
   resources :channels do
     resources :memberships
+    resources :messages
   end
-  get 'my_channels', to: 'channels#my_channels'
+
+  get 'my_channels_show/:id', to: 'channels#my_channels_show', as: 'my_channels_show'
 end

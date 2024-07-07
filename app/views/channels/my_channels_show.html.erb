@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @channels.each do |channel| %>
+            <tr>
+              <td><%= link_to "#{channel.name}", my_channels_show_path(channel.id) %> </td>
+              <td>
+                <%= button_to channel_membership_path(channel, @my_channel_memberships[channel.id]), method: :delete, class: 'btn bg-transparent rounded-0' do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              </td>        
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
+      <% @messages.each do |message| %>
+        <div class="text-danger"><%= message.user.login%></div>
+        <div  class="ms-4"><%= message.body%></div>
+      <%end%>
+      <%= form_with model: [@channel, @message]  do |form| %>
+        <%= form.text_field :body, class: 'form-control' %>        
+        <%= form.submit "Send", class: 'btn bg-warning-subtle rounded-0 my-2 ' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

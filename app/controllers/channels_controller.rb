@@ -14,13 +14,20 @@ class ChannelsController < ApplicationController
   end
 
   
-  def my_channels
+  def my_channels_show
     @channels=current_user.channels
+
     @my_channel_memberships = {}
     @channels.each do |channel|
-      @my_channel_memberships[channel.id] = current_user.memberships.find_by(channel_id: channel.id)
+      @my_channel_memberships[channel.id] = current_user.memberships.find_by(channel_id: channel.id)   
     end
+
+    @channel=Channel.find(params[:id])
+    @messages = @channel.messages
+    @message = @channel.messages.new(user_id: current_user.id)
   end
+
+  
 
   def show
     @channel=Channel.find(params[:id])
