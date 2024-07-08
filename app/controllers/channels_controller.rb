@@ -24,7 +24,8 @@ class ChannelsController < ApplicationController
 
     @channel=Channel.find(params[:id])
     @messages = @channel.messages
-    @message = @channel.messages.new(user_id: current_user.id)
+    
+    @message = Message.new
   end
 
   

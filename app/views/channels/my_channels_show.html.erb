@@ -22,10 +22,16 @@
       </table>
     </div>
     <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
-      <% @messages.each do |message| %>
-        <div class="text-danger"><%= message.user.login%></div>
-        <div  class="ms-4"><%= message.body%></div>
-      <%end%>
+
+      <%= turbo_stream_from @channel %>
+        <%= turbo_frame_tag "all_messages" do %>     
+          <% @messages.each do |message| %>             
+            <div id="all_messages">            
+              <%= render 'messages/list_messages', message: message %>
+            </div>
+          <% end %>
+        <% end %>
+
       <%= form_with model: [@channel, @message]  do |form| %>
         <%= form.text_field :body, class: 'form-control' %>        
         <%= form.submit "Send", class: 'btn bg-warning-subtle rounded-0 my-2 ' %>
