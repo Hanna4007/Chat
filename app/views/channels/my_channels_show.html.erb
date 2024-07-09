@@ -32,10 +32,8 @@
           <% end %>
         <% end %>
 
-      <%= form_with model: [@channel, @message]  do |form| %>
-        <%= form.text_field :body, class: 'form-control' %>        
-        <%= form.submit "Send", class: 'btn bg-warning-subtle rounded-0 my-2 ' %>
-      <% end %>
+      <%= render 'messages/message_form', channel: @channel, message: Message.new %>  
+    
     </div>
   </div>
 </div>

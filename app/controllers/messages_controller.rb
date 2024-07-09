@@ -1,13 +1,8 @@
 class MessagesController < ApplicationController
 
   def create
-    create_message
-    
-    if @message.valid?
-      redirect_to my_channels_show_path(@channel.id) 
-    else
-      render :new, status: :unprocessable_entity
-    end
+    create_message   
+    render turbo_stream: turbo_stream.replace("new_message_form", partial: "messages/message_form") 
   end
 
   private
