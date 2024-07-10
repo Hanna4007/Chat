@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,44 +12,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_29_123204) do
-  create_table "channels", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "private"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+ActiveRecord::Schema[7.0].define(version: 20_240_629_123_204) do
+  create_table 'channels', force: :cascade do |t|
+    t.string 'name', null: false
+    t.boolean 'private'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "channel_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_memberships_on_channel_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
+  create_table 'memberships', force: :cascade do |t|
+    t.integer 'user_id', null: false
+    t.integer 'channel_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['channel_id'], name: 'index_memberships_on_channel_id'
+    t.index ['user_id'], name: 'index_memberships_on_user_id'
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "user_id", null: false
-    t.integer "channel_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_messages_on_channel_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+  create_table 'messages', force: :cascade do |t|
+    t.text 'body', null: false
+    t.integer 'user_id', null: false
+    t.integer 'channel_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['channel_id'], name: 'index_messages_on_channel_id'
+    t.index ['user_id'], name: 'index_messages_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "login", null: false
-    t.string "phone_number", null: false
-    t.string "password_digest"
-    t.boolean "admin", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'login', null: false
+    t.string 'phone_number', null: false
+    t.string 'password_digest'
+    t.boolean 'admin', default: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "memberships", "channels"
-  add_foreign_key "memberships", "users"
-  add_foreign_key "messages", "channels"
-  add_foreign_key "messages", "users"
+  add_foreign_key 'memberships', 'channels'
+  add_foreign_key 'memberships', 'users'
+  add_foreign_key 'messages', 'channels'
+  add_foreign_key 'messages', 'users'
 end

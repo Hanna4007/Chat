@@ -1,8 +1,9 @@
-class MessagesController < ApplicationController
+# frozen_string_literal: true
 
+class MessagesController < ApplicationController
   def create
-    create_message   
-    render turbo_stream: turbo_stream.replace("new_message_form", partial: "messages/message_form") 
+    create_message
+    render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/message_form')
   end
 
   private
@@ -15,5 +16,4 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :channel_id, :user_id)
   end
-
 end

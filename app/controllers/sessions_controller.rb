@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   include Authentication
 
   before_action :authentication, only: %i[new create]
   before_action :no_authentication, only: %i[destroy]
-  
+
   def new; end
 
   def create

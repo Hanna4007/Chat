@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class MembershipsController < ApplicationController
-  
   def index
     @channel = Channel.find(params[:channel_id])
     @memberships = @channel.memberships
   end
-  
+
   def new
     @channel = Channel.find(params[:channel_id])
     @membership = @channel.memberships.new
@@ -12,7 +13,7 @@ class MembershipsController < ApplicationController
 
   def create
     create_membership
-    
+
     if @membership.valid?
       redirect_to root_path
     else

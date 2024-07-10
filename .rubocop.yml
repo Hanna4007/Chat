@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/migrate/**/*'
+    - 'bin/bundle'
+  DisplayCopNames: true
+
+Style/Documentation:
+  Enabled: false
+
