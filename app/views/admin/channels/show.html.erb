@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" >
+      <% @channels.each do |channel| %>
+        <p><%= link_to "#{channel.name}", admin_channel_path(channel.id) %> </p>
+      <% end %>
+    </div>
+    <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Login</th>
+            <th>Phone number</th>
+            <th>Admin status</th>
+          </tr>
+        </thead>  
+
+        <tbody>
+          <% @memberships.each do |membership| %>
+            <tr>
+              <td><%= membership.user.login %> </td>
+              <td><%= membership.user.phone_number %></td>
+              <td><%= membership.user.admin %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>   
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Login</th>
+            <th>Phone number</th>
+            <th>Admin status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to "#{user.login}", admin_user_path(user.id) %> </td>
+              <td><%= user.phone_number %></td>
+              <td><%= user.admin %></td>   
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 border border-warning border-top-0 border-bottom-0" >
+      <h4>Channels</h4>
+      <% if @channels.any? %>
+        <% @channels.each do |channel| %>
+          <p><%= channel.name %> </p>
+        <% end %>
+      <% else %>
+        <p>No channels</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

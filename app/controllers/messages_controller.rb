@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class MessagesController < ApplicationController
+  include Authentication
+  before_action :no_authentication
+
   def create
     create_message
     render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/message_form')

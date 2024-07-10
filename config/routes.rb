@@ -5,14 +5,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root 'users#index'
-  resources :users, only: %i[index new create]
+  root 'channels#index'
+  resources :users, only: %i[new create]
   resource :user, only: %i[edit update]
   resource :session, only: %i[new create destroy]
   resources :channels do
-    resources :memberships
-    resources :messages
+    resources :memberships, only: %i[new create destroy]
+    resources :messages, only: %i[create]
   end
 
-  get 'my_channels_show/:id', to: 'channels#my_channels_show', as: 'my_channels_show'
+  namespace :admin do
+    resources :users, only: %i[show]
+    resources :channels, only: %i[show]
+  end
 end

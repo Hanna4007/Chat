@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 class MembershipsController < ApplicationController
-  def index
-    @channel = Channel.find(params[:channel_id])
-    @memberships = @channel.memberships
-  end
+  include Authentication
+  before_action :no_authentication
 
   def new
     @channel = Channel.find(params[:channel_id])

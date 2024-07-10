@@ -6,10 +6,6 @@ class UsersController < ApplicationController
   before_action :authentication, only: %i[new create]
   before_action :no_authentication, only: %i[edit update]
 
-  def index
-    @users = User.all
-  end
-
   def new
     @user = User.new
   end

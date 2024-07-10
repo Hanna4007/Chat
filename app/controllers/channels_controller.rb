@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ChannelsController < ApplicationController
+  include Authentication
+  before_action :no_authentication
+
   def index
     @channels = Channel.all
 
@@ -14,7 +17,7 @@ class ChannelsController < ApplicationController
     end
   end
 
-  def my_channels_show
+  def show
     @channels = current_user.channels
 
     @my_channel_memberships = {}
@@ -26,11 +29,6 @@ class ChannelsController < ApplicationController
     @messages = @channel.messages
 
     @message = Message.new
-  end
-
-  def show
-    @channel = Channel.find(params[:id])
-    @memberships = @channel.memberships.all
   end
 
   def new
