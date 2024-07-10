@@ -26,9 +26,7 @@
       <%= turbo_stream_from @channel %>
         <%= turbo_frame_tag "all_messages" do %>     
           <% @messages.each do |message| %>             
-            <div id="all_messages">            
-              <%= render 'messages/list_messages', message: message %>
-            </div>
+            <%= render 'messages/list_messages', message: message %>           
           <% end %>
         <% end %>
 
