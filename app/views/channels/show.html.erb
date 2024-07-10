@@ -24,10 +24,8 @@
     <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
 
       <%= turbo_stream_from @channel %>
-        <%= turbo_frame_tag "all_messages" do %>     
-          <% @messages.each do |message| %>             
-            <%= render 'messages/list_messages', message: message %>           
-          <% end %>
+        <%= turbo_frame_tag "all_messages" do %>                
+          <%= render partial: 'messages/list_messages', collection: @messages, as: :message %>           
         <% end %>
 
       <%= render 'messages/message_form', channel: @channel, message: Message.new %>  

@@ -26,7 +26,7 @@ class ChannelsController < ApplicationController
     end
 
     @channel = Channel.find(params[:id])
-    @messages = @channel.messages
+    @messages = @channel.messages.includes(:user)
 
     @message = Message.new
   end
