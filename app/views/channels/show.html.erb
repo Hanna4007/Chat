@@ -21,7 +21,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
+    <div class="col-md-8 border border-warning border-top-0 border-bottom-0" >
 
       <%= turbo_stream_from @channel %>
         <%= turbo_frame_tag "all_messages" do %>                
@@ -29,7 +29,11 @@
         <% end %>
 
       <%= render 'messages/message_form', channel: @channel, message: Message.new %>  
-    
+    </div>
+    <div class="col-md-2 border border-warning border-top-0 border-bottom-0" >
+      <%= turbo_frame_tag "all_memberships" do %> 
+        <%= render partial: 'memberships/list_memberships', collection: @memberships, as: :membership%>
+      <% end %>   
     </div>
   </div>
 </div>
