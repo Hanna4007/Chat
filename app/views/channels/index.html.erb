@@ -1,38 +1,19 @@
 <div class="container-fluid">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>  
+<%= turbo_stream_from current_user %>
+  <%= turbo_frame_tag "all_channels_for_user" do %> 
+    <%= render partial: 'memberships/list_channels_for_user', collection: @memberships_for_current_user, as: :membership %>           
+  <% end %>
 
-    <tbody>
-      <% @channels.each do |channel| %>
-        <tr>
-          <td><%= link_to "#{channel.name }", channel_path(channel) %> </td>
-          <td><%= channel.private %></td>
-          <td>
-            <%= link_to 'Delete channel', channel_path(channel), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"}, class: 'btn bg-warning-subtle rounded-0' %>
-          </td>
-          <td><%= link_to 'Edit channel', edit_channel_path(channel), class: 'btn bg-warning-subtle rounded-0' %></td>
-          <td>
-            <% if current_user.channels.include?(channel) %>
-              <%= link_to 'Leave the channel', channel_membership_path(channel, @channel_memberships[channel.id]), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"}, class: 'btn bg-warning-subtle rounded-0' %>
-            <% else %>
-              <%= form_with model: [channel, @channel_memberships[channel.id]]  do |form| %>
-                <%= form.hidden_field :channel_id, value: channel.id %>                   
-                <%= form.submit "Join the channel", class: 'btn bg-warning-subtle rounded-0' %>
-              <% end %>
-            <% end %>             
-          </td>          
-        </tr>
+
+  <% @channels.each do |channel| %>
+    <div class="border-bottom p-3 d-flex justify-content-between align-items-center">       
+      <%= channel.name %>
+                
+      <%= form_with model: [channel, @channel_memberships[channel.id]]  do |form| %>
+        <%= form.hidden_field :channel_id, value: channel.id %>                   
+        <%= form.submit "Join the channel", class: 'btn bg-warning-subtle rounded-0' %>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  <% end %>
+ 
 </div>

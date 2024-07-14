@@ -5,15 +5,13 @@ class ChannelsController < ApplicationController
   before_action :no_authentication
 
   def index
-    @channels = Channel.all
+    
+    @memberships_for_current_user = current_user.memberships
 
+    @channels = Channel.where.not(id: @memberships_for_current_user.pluck(:channel_id))
     @channel_memberships = {}
     @channels.each do |channel|
-      @channel_memberships[channel.id] = if current_user.channels.include?(channel)
-                                           current_user.memberships.find_by(channel_id: channel.id)
-                                         else
-                                           channel.memberships.new(user_id: current_user.id)
-                                         end
+      @channel_memberships[channel.id] = channel.memberships.new(user_id: current_user.id)
     end
   end
 

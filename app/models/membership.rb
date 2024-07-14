@@ -6,4 +6,6 @@ class Membership < ApplicationRecord
 
   broadcasts_to :channel, target: 'all_memberships', partial: 'memberships/list_memberships'
   broadcasts_to :user, target: 'all_memberships_for_user', partial: 'memberships/list_memberships_for_user'
+  broadcasts_to :user, target: 'all_channels_for_user', partial: 'memberships/list_channels_for_user'
+
 end
