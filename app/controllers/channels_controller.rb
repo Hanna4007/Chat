@@ -20,13 +20,9 @@ class ChannelsController < ApplicationController
   def show
     @channels = current_user.channels
 
-    @my_channel_memberships = {}
-    @channels.each do |channel|
-      @my_channel_memberships[channel.id] = current_user.memberships.find_by(channel_id: channel.id)
-    end
-
     @channel = Channel.find(params[:id])
     @memberships = @channel.memberships
+    @memberships_for_user = current_user.memberships.includes(:channel) 
 
     @messages = @channel.messages.includes(:user)
 

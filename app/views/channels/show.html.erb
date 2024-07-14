@@ -1,26 +1,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2" >
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @channels.each do |channel| %>
-            <tr>
-              <td><%= link_to "#{channel.name}", channel_path(channel.id) %> </td>
-              <td>
-                <%= button_to channel_membership_path(channel, @my_channel_memberships[channel.id]), method: :delete, class: 'btn bg-transparent rounded-0' do %>
-                  <i class="fas fa-trash-alt"></i>
-                <% end %>
-              </td>        
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= turbo_stream_from current_user %>
+        <%= turbo_frame_tag "all_memberships_for_user" do %>                
+          <%= render partial: 'memberships/list_memberships_for_user', collection: @memberships_for_user, as: :membership %>           
+        <% end %>
     </div>
+        
     <div class="col-md-8 border border-warning border-top-0 border-bottom-0" >
 
       <%= turbo_stream_from @channel %>
