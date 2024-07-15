@@ -24,7 +24,9 @@
           <% if current_user.present? %>
             <% if current_user.admin? %>
               <li class="nav-item"> <%= link_to "Users", admin_user_path(current_user), class: "nav-link" %> </li>
+              <%if current_user.channels.any? %> </li>
               <li class="nav-item"> <%= link_to "Channels", admin_channel_path(current_user.channels.last), class: "nav-link" %> </li>
+             <% end %>
             <% end %>
             <li class="nav-item"> <%= link_to "All channels", channels_path, class: "nav-link" %> </li>
             <li class="nav-item"> 

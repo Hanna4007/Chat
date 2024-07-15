@@ -4,6 +4,10 @@
     <%= render partial: 'memberships/list_channels_for_user', collection: @memberships_for_current_user, as: :membership %>           
   <% end %>
 
+ <%= turbo_frame_tag "all_channels_without_user" do %>   
+  <%= render partial: 'memberships/list_channels_without_user', collection: @channels, as: :channel %>           
+<% end %>  
+
 
   <% @channels.each do |channel| %>
     <div class="border-bottom p-3 d-flex justify-content-between align-items-center">       
@@ -15,5 +19,5 @@
       <% end %>
     </div>
   <% end %>
- 
+
 </div>
