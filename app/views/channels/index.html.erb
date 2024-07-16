@@ -8,16 +8,4 @@
   <%= render partial: 'memberships/list_channels_without_user', collection: @channels, as: :channel %>           
 <% end %>  
 
-
-  <% @channels.each do |channel| %>
-    <div class="border-bottom p-3 d-flex justify-content-between align-items-center">       
-      <%= channel.name %>
-                
-      <%= form_with model: [channel, @channel_memberships[channel.id]]  do |form| %>
-        <%= form.hidden_field :channel_id, value: channel.id %>                   
-        <%= form.submit "Join the channel", class: 'btn bg-warning-subtle rounded-0' %>
-      <% end %>
-    </div>
-  <% end %>
-
 </div>

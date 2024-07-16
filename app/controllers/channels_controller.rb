@@ -5,14 +5,9 @@ class ChannelsController < ApplicationController
   before_action :no_authentication
 
   def index
-    
     @memberships_for_current_user = current_user.memberships
 
     @channels = Channel.where.not(id: @memberships_for_current_user.pluck(:channel_id))
-    @channel_memberships = {}
-    @channels.each do |channel|
-      @channel_memberships[channel.id] = channel.memberships.new(user_id: current_user.id)
-    end
   end
 
   def show
@@ -20,7 +15,7 @@ class ChannelsController < ApplicationController
 
     @channel = Channel.find(params[:id])
     @memberships = @channel.memberships
-    @memberships_for_user = current_user.memberships.includes(:channel) 
+    @memberships_for_user = current_user.memberships.includes(:channel)
 
     @messages = @channel.messages.includes(:user)
 

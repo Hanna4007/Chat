@@ -1,5 +1,9 @@
 <div class="container-fluid">
   <div class="row">
+  <% unless user_has_channels? %>
+  <h4>You don't have any channels yet. 
+  <%= link_to "Please add a channel.", channels_path%> </h4>
+  <% else %>
     <div class="col-md-2" >
       <%= turbo_stream_from current_user %>
         <%= turbo_frame_tag "all_memberships_for_user" do %>                
@@ -21,6 +25,7 @@
         <%= render partial: 'memberships/list_memberships', collection: @memberships, as: :membership%>
       <% end %>   
     </div>
+    <% end %> 
   </div>
 </div>
 
