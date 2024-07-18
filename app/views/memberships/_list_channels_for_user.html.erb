@@ -1,11 +1,20 @@
-
 <%= turbo_frame_tag membership do %> 
- <div class="border-bottom p-3 d-flex justify-content-between align-items-center">   
-    <%= link_to "#{membership.channel.name}", channel_path(membership.channel_id), data: { turbo_frame: "_top" }%>
-
-    <%= link_to 'Leave the channel', channel_membership_path(membership.channel_id, membership), data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"}, class: 'btn bg-warning-subtle rounded-0' %>
-
-  </div>
+  <li class="p-2 border-bottom bg-body-tertiary">
+    <a href="#!" class="d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-row w-100">
+        <div class="fw-bold">
+          <%= link_to membership.channel.name, channel_path(membership.channel_id), data: { turbo_frame: "_top" } %>
+        </div>
+        <div class="ms-auto align-self-end">
+          <%= link_to 'Leave the channel', channel_membership_path(membership.channel_id, membership), 
+                        data: {
+                          turbo_frame: "_top",
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                        },
+                        class: 'btn bg-warning-subtle rounded-0' %>
+        </div>
+      </div>
+    </a>
+  </li>
 <% end %>

@@ -30,8 +30,9 @@
         </div>
       </div>
 
-      <div class="col-md-8">
-        <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
+      <div class="col-md-8 mt-2">
+        <h5 class="font-weight-bold mb-3 text-center" style="color: #8B4513;"><%= @channel.name %></h5>
+        <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 170px); overflow-y: scroll;">
           <%= turbo_stream_from @channel %>
           <%= turbo_frame_tag "all_messages" do %>
             <%= render partial: 'messages/list_messages', collection: @messages, as: :message %>
