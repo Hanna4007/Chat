@@ -1,18 +1,19 @@
 <div class="container-fluid">
-  <h4>New channel</h4>
-  <%= form_with model: @channel do |form| %>
-    <p> <%= form.label :name %> 
-    <%= form.text_field :name, class: 'form-control' %> </p>
- 	 
-   <p>
-    <%= form.radio_button :private, true %>
-    <%= form.label :private, 'Private' %>
-  </p>
-  <p>
-    <%= form.radio_button :private, false %>
-    <%= form.label :public, 'Public' %>
-  </p>
-      
-    <%= form.submit "Create channel", class: 'btn bg-warning-subtle rounded-0 my-2   ' %>
-  <% end %>
+  <div class="row">
+    <div class="container mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="fw-bold mb-0">New channel</h4>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @channel do |form| %>
+            <div class="mb-3">
+              <%= form.text_field :name, class: 'form-control', placeholder: "Enter channel name" %>
+            </div>
+            <%= form.submit "Create channel", class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

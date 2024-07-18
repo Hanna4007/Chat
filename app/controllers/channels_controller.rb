@@ -35,25 +35,6 @@ class ChannelsController < ApplicationController
     end
   end
 
-  def edit
-    @channel = Channel.find(params[:id])
-  end
-
-  def update
-    @channel = Channel.find(params[:id])
-    if @channel.update(channel_params)
-      redirect_to root_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @channel = Channel.find(params[:id])
-    @channel.destroy
-    redirect_to root_path
-  end
-
   private
 
   def create_channel

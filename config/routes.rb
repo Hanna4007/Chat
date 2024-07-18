@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   resource :user, only: %i[edit update]
   resource :session, only: %i[new create destroy]
-  resources :channels do
+  resources :channels, only: %i[index show new create] do
     resources :memberships, only: %i[new create destroy]
     resources :messages, only: %i[create]
   end
