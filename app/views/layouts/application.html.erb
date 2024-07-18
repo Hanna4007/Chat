@@ -30,7 +30,7 @@
             <li class="nav-item"> <%= link_to "All channels", channels_path, class: "nav-link" %> </li>
             <li class="nav-item"> 
               
-                <%= link_to "My channels", last_channel ? channel_path(last_channel) : channel_path(current_user.channels.first), class: "nav-link" %>
+                <%= link_to "My channels", last_channel ? channel_path(last_channel) : channels_path, class: "nav-link" %>
               <% else %>
                 <%= link_to "Add channels", channels_path, class: "nav-link" %>
               <% end %>

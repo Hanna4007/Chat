@@ -5,16 +5,17 @@ class MessagesController < ApplicationController
   before_action :no_authentication
 
   def create
-    create_message
+    @channel = Channel.find(params[:channel_id])
+
+    unless @channel.memberships.exists?(user_id: current_user.id)   
+      return redirect_to root_path
+    end
+
+    @message = @channel.messages.create(message_params.merge(user_id: current_user.id))
     render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/message_form')
   end
 
   private
-
-  def create_message
-    @channel = Channel.find(params[:channel_id])
-    @message = @channel.messages.create(message_params.merge(user_id: current_user.id))
-  end
 
   def message_params
     params.require(:message).permit(:body, :channel_id, :user_id)

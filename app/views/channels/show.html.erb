@@ -14,48 +14,63 @@
         </div>
       </div>
     <% else %>
-      <div class="col-md-2 mt-2">
-        <h5 class="font-weight-bold mb-3 text-start">Channels</h5>
-        <div class="card mb-4">
-          <div class="card-body">
-            <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
-              <ul class="list-unstyled mb-0">
-                <%= turbo_stream_from current_user %>
-                <%= turbo_frame_tag "all_memberships_for_user" do %>
-                  <%= render partial: 'memberships/list_memberships_for_user', collection: @memberships_for_user, as: :membership %>
-                <% end %>
-              </ul>
+      <% unless @memberships.exists?(user_id: current_user.id) %>
+        <div class="container mt-3">
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between p-3">
+              <p class="fw-bold mb-0 text-center w-100">You are not a member of this channel.</p>
+            </div>
+            <div class="card-body text-center">
+              <p class="mb-0">
+                <%= link_to "Please add a channel.", channels_path, class: "btn btn-primary fw-bold" %>
+              </p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-md-8 mt-2">
-        <h5 class="font-weight-bold mb-3 text-center" style="color: #8B4513;"><%= @channel.name %></h5>
-        <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 170px); overflow-y: scroll;">
-          <%= turbo_stream_from @channel %>
-          <%= turbo_frame_tag "all_messages" do %>
-            <%= render partial: 'messages/list_messages', collection: @messages, as: :message %>
-          <% end %>
-        </div>
-
-        <%= render 'messages/message_form', channel: @channel, message: Message.new %>
-      </div>
-
-      <div class="col-md-2 mt-2">
-        <h5 class="font-weight-bold mb-3 text-start">Members</h5>
-        <div class="card mb-4">
-          <div class="card-body">
-            <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
-              <ul class="list-unstyled mb-0">
-                <%= turbo_frame_tag "all_memberships" do %>
-                  <%= render partial: 'memberships/list_memberships', collection: @memberships, as: :membership %>
-                <% end %>
-              </ul>
+      <% else %>
+        <div class="col-md-2 mt-2">
+          <h5 class="font-weight-bold mb-3 text-start">Channels</h5>
+          <div class="card mb-4">
+            <div class="card-body">
+              <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
+                <ul class="list-unstyled mb-0">
+                  <%= turbo_stream_from current_user %>
+                  <%= turbo_frame_tag "all_memberships_for_user" do %>
+                    <%= render partial: 'memberships/list_memberships_for_user', collection: @memberships_for_user, as: :membership %>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="col-md-8 mt-2">
+          <h5 class="font-weight-bold mb-3 text-center" style="color: #8B4513;"><%= @channel.name %></h5>
+           <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 170px); overflow-y: scroll;">
+            <%= turbo_stream_from @channel %>
+            <%= turbo_frame_tag "all_messages" do %>
+              <%= render partial: 'messages/list_messages', collection: @messages, as: :message %>
+            <% end %>
+          </div>
+          
+          <%= render 'messages/message_form', channel: @channel, message: Message.new %>
+        </div>
+
+        <div class="col-md-2 mt-2">
+          <h5 class="font-weight-bold mb-3 text-start">Members</h5>
+          <div class="card mb-4">
+            <div class="card-body">
+              <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
+                <ul class="list-unstyled mb-0">
+                  <%= turbo_frame_tag "all_memberships" do %>
+                    <%= render partial: 'memberships/list_memberships', collection: @memberships, as: :membership %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
