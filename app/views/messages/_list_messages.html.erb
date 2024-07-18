@@ -1,3 +1,11 @@
-
-<div class="text-danger"><%= message.user.login%></div>
-<div  class="ms-4"><%= message.body%></div>
+<div class="container mt-3">
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between p-3">
+      <p class="fw-bold mb-0"><%= message.user.login %></p>
+      <p class="text-muted small mb-0"><i class="far fa-clock"></i> <%= time_ago_in_words(message.created_at) %> ago</p>
+    </div>
+    <div class="card-body">
+      <%= message.body %>
+    </div>
+  </div>
+</div>

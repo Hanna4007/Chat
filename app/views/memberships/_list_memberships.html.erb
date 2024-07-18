@@ -1,3 +1,11 @@
-  <%= turbo_frame_tag membership do %> 
-  <div><%= membership.user.login %></div>
-  <% end %>
+<%= turbo_frame_tag membership do %> 
+  <li class="p-2 border-bottom bg-body-tertiary">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-row w-100">
+        <div class="fw-bold">
+          <%= membership.user.login %>
+        </div>
+      </div>
+    </div>
+  </li>
+<% end %>

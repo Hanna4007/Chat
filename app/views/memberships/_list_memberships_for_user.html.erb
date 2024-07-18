@@ -1,13 +1,16 @@
-
 <%= turbo_frame_tag membership do %> 
-  <div class="d-flex justify-content-between align-items-center">
-    <div><%= link_to "#{membership.channel.name}", channel_path(membership.channel_id), data: { turbo_frame: "_top" }%></div>
-    <div> 
-      <%= button_to channel_membership_path(membership.channel, membership), method: :delete, data: { turbo_frame: "_top" }, class: 'btn bg-transparent rounded-0' do %>
-        <i class="fas fa-trash-alt"></i>
-      <% end %>
-    </div>
-  </div>
+  <li class="p-2 border-bottom bg-body-tertiary">
+    <a href="#!" class="d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-row w-100">
+        <div class="fw-bold">
+          <%= link_to "#{membership.channel.name}", channel_path(membership.channel_id), data: { turbo_frame: "_top" } %>
+        </div>
+        <div class="ms-auto align-self-end">
+          <%= button_to channel_membership_path(membership.channel, membership), method: :delete, data: { turbo_frame: "_top" }, class: 'btn bg-transparent rounded-0' do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    </a>
+  </li>
 <% end %>
-
-

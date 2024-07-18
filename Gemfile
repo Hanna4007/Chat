@@ -61,6 +61,8 @@ group :development do
 
   gem 'rubocop', require: false
 
+  gem 'erb_lint', require: false
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
