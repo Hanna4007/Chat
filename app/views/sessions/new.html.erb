@@ -1,12 +1,26 @@
 <div class="container-fluid">
-  <h4>Log in</h4>
-  <%= form_with scope: :session, url: session_path, data: {turbo: false} do |form| %>
-    <p> <%= form.label :phone_number %> 
-        <%= form.text_field :phone_number, placeholder: '+380 xxx xx xx xx', class: 'form-control' %> </p> 
+  <div class="row">
+    <div class="container mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="font-weight-bold mb-0 text-start">Log in</h5>          
+        </div>
+        <div class="card-body">
+          <%= form_with scope: :session, url: session_path, data: { turbo: false } do |form| %>
+            <div class="mb-3">
+              <%= form.label :phone_number %>
+              <%= form.text_field :phone_number, class: 'form-control', placeholder: '+380 xxx xx xx xx' %>
+            </div>
 
-     <p> <%= form.label :password %> 
-    <%= form.password_field :password, class: 'form-control' %> </p>   
+            <div class="mb-3">
+              <%= form.label :password %>
+              <%= form.password_field :password, class: 'form-control' %>
+            </div>
 
-    <%= form.submit "Log in", class: 'btn bg-warning-subtle rounded-0 my-2'  %>
-  <% end %>
+            <%= form.submit "Log in", class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

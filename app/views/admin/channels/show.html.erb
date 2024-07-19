@@ -1,31 +1,44 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2" >
-      <% @channels.each do |channel| %>
-        <p><%= link_to "#{channel.name}", admin_channel_path(channel.id) %> </p>
-      <% end %>
-    </div>
-    <div class="col-md-10 border border-warning border-top-0 border-bottom-0" >
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Login</th>
-            <th>Phone number</th>
-            <th>Admin status</th>
-          </tr>
-        </thead>  
-
-        <tbody>
-          <% @memberships.each do |membership| %>
-            <tr>
-              <td><%= membership.user.login %> </td>
-              <td><%= membership.user.phone_number %></td>
-              <td><%= membership.user.admin %></td>
-            </tr>
+    <div class="col-md-2 mt-3 d-flex flex-column" style="height: calc(100vh - 110px);">
+      <div class="card flex-fill d-flex flex-column">
+        <div class="card-header">
+          <h5 class="font-weight-bold mb-0 text-start">Channels</h5>
+        </div>
+        <div class="card-body flex-grow-1 overflow-auto">
+          <% @channels.each do |channel| %>
+            <p><%= link_to "#{channel.name}", admin_channel_path(channel.id) %></p>
           <% end %>
-        </tbody>
-      </table>   
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10 mt-3 d-flex flex-column" style="height: calc(100vh - 110px);">
+      <div class="card flex-fill d-flex flex-column">
+        <div class="card-header">
+          <h5 class="font-weight-bold mb-0 text-start">Members</h5>
+        </div>
+        <div class="card-body flex-grow-1 overflow-auto">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>Login</th>
+                <th>Phone number</th>
+                <th>Admin status</th>
+              </tr>
+            </thead>  
+            <tbody>
+              <% @memberships.each do |membership| %>
+                <tr>
+                  <td><%= membership.user.login %></td>
+                  <td><%= membership.user.phone_number %></td>
+                  <td><%= membership.user.admin %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

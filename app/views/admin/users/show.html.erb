@@ -1,37 +1,54 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8" >
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Login</th>
-            <th>Phone number</th>
-            <th>Admin status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= link_to "#{user.login}", admin_user_path(user.id) %> </td>
-              <td><%= user.phone_number %></td>
-              <td><%= user.admin %></td>   
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="col-md-8 mt-3 d-flex flex-column" style="height: calc(100vh - 110px);">
+      <div class="card flex-fill d-flex flex-column">
+        <div class="card-header">
+          <h5 class="font-weight-bold mb-0 text-start">User List</h5>
+        </div>
+        <div class="card-body flex-grow-1 overflow-auto">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>Login</th>
+                <th>Phone number</th>
+                <th>Admin status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= link_to "#{user.login}", admin_user_path(user.id) %></td>
+                  <td><%= user.phone_number %></td>
+                  <td><%= user.admin %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4 border border-warning border-top-0 border-bottom-0" >
-      <h4>Channels</h4>
-      <% if @channels.any? %>
-        <% @channels.each do |channel| %>
-          <p><%= channel.name %> </p>
-        <% end %>
-      <% else %>
-        <p>No channels</p>
-      <% end %>
+
+    <div class="col-md-4 mt-3 d-flex flex-column" style="height: calc(100vh - 110px);">
+      <div class="card flex-fill d-flex flex-column">
+        <div class="card-header">
+          <h5 class="font-weight-bold mb-0 text-start">Channels</h5>
+        </div>
+        <div class="card-body flex-grow-1 overflow-auto">
+          <% if @channels.any? %>
+            <ul class="list-unstyled mb-0">
+              <% @channels.each do |channel| %>
+                <li class="mb-1"><%= channel.name %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="mb-0">No channels</p>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 
 
