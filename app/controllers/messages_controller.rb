@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     @channel = Channel.find(params[:channel_id])
 
     unless @channel.memberships.exists?(user_id: current_user.id)   
-      return redirect_to root_path
+      return render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/for_user_without_membership')
     end
 
     @message = @channel.messages.create(message_params.merge(user_id: current_user.id))

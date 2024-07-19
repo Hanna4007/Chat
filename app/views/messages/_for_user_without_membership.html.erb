@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "new_message_form" do %>
+  <div class="fixed-bottom bg-white py-3 px-4" style="width: calc(100vw - 500px); margin: 0 auto; height: 662px;">
+    <div class="container mt-3">
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between p-3">
+          <p class="fw-bold mb-0 text-center text-danger w-100">You are not a member of this channel.</p>
+        </div>
+        <div class="card-body text-center">
+          <%= link_to "Please add a channel.", channels_path, data: { turbo_frame: "_top" }, class: "btn btn-primary fw-bold" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
