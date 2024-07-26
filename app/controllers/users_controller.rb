@@ -12,12 +12,8 @@ class UsersController < ApplicationController
 
   def create
     create_user
-    if @user.valid?
-      session[:user_id] = @user.id
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    session[:user_id] = @user.id if @user.valid?
+    respond_with(@user, location: root_path)
   end
 
   def edit; end

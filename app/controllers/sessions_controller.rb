@@ -11,12 +11,8 @@ class SessionsController < ApplicationController
   def create
     user_params = params.require(:session)
     user = User.find_by(phone_number: user_params[:phone_number])&.authenticate(user_params[:password])
-    if user.present?
-      session[:user_id] = user.id
-      redirect_to root_path
-    else
-      render :new
-    end
+    session[:user_id] = user.id if user.present?
+    respond_with(user, location: root_path)
   end
 
   def destroy

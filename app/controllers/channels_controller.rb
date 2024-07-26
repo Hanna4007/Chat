@@ -3,6 +3,7 @@
 class ChannelsController < ApplicationController
   include Authentication
   include CurrentChannel
+  include CreateResource
   before_action :no_authentication
   before_action :current_channel, only: [:show]
 
@@ -30,17 +31,13 @@ class ChannelsController < ApplicationController
 
   def create
     create_channel
-    if @channel.valid?
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   private
 
   def create_channel
-    @channel = Channel.create(channel_params)
+    @channel = Channel.new(channel_params)
+    create_resource(@channel)
   end
 
   def channel_params

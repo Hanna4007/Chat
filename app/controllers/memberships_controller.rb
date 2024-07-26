@@ -3,21 +3,12 @@
 class MembershipsController < ApplicationController
   include Authentication
   include CurrentChannel
+  include CreateResource
   before_action :no_authentication
-  before_action :current_channel, only: %i[new create destroy]
-
-  def new
-    @membership = current_channel.memberships.new
-  end
+  before_action :current_channel, only: %i[create destroy]
 
   def create
     create_membership
-
-    if @membership.valid?
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def destroy
@@ -29,6 +20,7 @@ class MembershipsController < ApplicationController
   private
 
   def create_membership
-    @membership = current_channel.memberships.create(user: current_user)
+    @membership = current_channel.memberships.new(user: current_user)
+    create_resource(@membership)
   end
 end

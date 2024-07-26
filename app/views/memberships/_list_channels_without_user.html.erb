@@ -7,7 +7,8 @@
         </div>
         <div class="ms-auto align-self-end">
           <%= form_with model: [channel, Membership.new], data: { turbo_frame: "_top" } do |form| %>
-            <%= form.hidden_field :channel_id, value: channel.id %>                   
+            <%= form.hidden_field :channel_id, value: channel.id %>
+            <%= form.hidden_field :user_id, value: current_user.id %>                    
             <%= form.submit "Join the channel", class: 'btn bg-warning-subtle rounded-0' %>
           <% end %>
         </div>
