@@ -1,7 +1,7 @@
 
 <%= turbo_frame_tag "new_message_form" do %>
   <div class="fixed-bottom bg-light py-3 px-4 border-top" style="width: calc(100vw - 500px); margin: 0 auto;">
-    <%= form_with model: [@channel, Message.new], id: "message-form", class: "d-flex align-items-center" do |form| %>
+    <%= form_with model: [current_channel, Message.new], id: "message-form", class: "d-flex align-items-center" do |form| %>
       <%= form.text_field :body, class: 'form-control flex-grow-1 me-3', placeholder: "Type message..." %>
       <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
     <% end %>

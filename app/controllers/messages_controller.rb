@@ -2,16 +2,17 @@
 
 class MessagesController < ApplicationController
   include Authentication
+  include CurrentChannel
   before_action :no_authentication
+  before_action :current_channel
 
   def create
-    @channel = Channel.find(params[:channel_id])
-
-    unless @channel.memberships.exists?(user_id: current_user.id)   
-      return render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/for_user_without_membership')
+    unless current_channel.memberships.exists?(user_id: current_user.id)
+      return render turbo_stream: turbo_stream.replace('new_message_form',
+                                                       partial: 'messages/for_user_without_membership')
     end
 
-    @message = @channel.messages.create(message_params.merge(user_id: current_user.id))
+    @message = current_channel.messages.create(message_params.merge(user_id: current_user.id))
     render turbo_stream: turbo_stream.replace('new_message_form', partial: 'messages/message_form')
   end
 

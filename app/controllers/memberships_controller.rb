@@ -2,11 +2,12 @@
 
 class MembershipsController < ApplicationController
   include Authentication
+  include CurrentChannel
   before_action :no_authentication
+  before_action :current_channel, only: %i[new create destroy]
 
   def new
-    @channel = Channel.find(params[:channel_id])
-    @membership = @channel.memberships.new
+    @membership = current_channel.memberships.new
   end
 
   def create
@@ -20,8 +21,7 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
-    @channel = Channel.find(params[:channel_id])
-    @membership = current_user.memberships.find_by(channel_id: @channel.id)
+    @membership = current_user.memberships.find_by!(channel_id: current_channel.id)
     @membership.destroy
     redirect_to root_path
   end
@@ -29,7 +29,6 @@ class MembershipsController < ApplicationController
   private
 
   def create_membership
-    @channel = Channel.find(params[:channel_id])
-    @membership = @channel.memberships.create(user: current_user)
+    @membership = current_channel.memberships.create(user: current_user)
   end
 end

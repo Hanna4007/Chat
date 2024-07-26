@@ -2,7 +2,9 @@
 
 class ChannelsController < ApplicationController
   include Authentication
+  include CurrentChannel
   before_action :no_authentication
+  before_action :current_channel, only: [:show]
 
   def index
     @memberships_for_current_user = current_user.memberships
@@ -13,13 +15,13 @@ class ChannelsController < ApplicationController
   def show
     @channels = current_user.channels
 
-    @channel = Channel.find(params[:id])
-    @memberships = @channel.memberships
+    @memberships = current_channel.memberships
     @memberships_for_user = current_user.memberships.includes(:channel)
 
-    @messages = @channel.messages.includes(:user)
+    @messages = current_channel.messages.includes(:user)
 
     @message = Message.new
+    respond_with current_channel
   end
 
   def new
