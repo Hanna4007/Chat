@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
+  include LastChannel
+
   helper_method :current_user
 
   private
