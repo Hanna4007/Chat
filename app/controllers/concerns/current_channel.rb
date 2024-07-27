@@ -7,6 +7,6 @@ module CurrentChannel
   end
 
   def current_channel
-    Channel.find(params[:channel_id] || params[:id])
+    @current_channel ||= Channel.find(params[:channel_id] || params[:id])
   end
 end

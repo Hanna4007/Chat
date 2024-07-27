@@ -14,7 +14,7 @@
         </div>
       </div>
     <% else %>
-      <% unless @memberships.exists?(user_id: current_user.id) %>
+      <% unless memberships_for_channel.exists?(user_id: current_user.id) %>
         <div class="container mt-3">
           <div class="card mb-4">
             <div class="card-header d-flex justify-content-between p-3">
@@ -36,7 +36,7 @@
                 <ul class="list-unstyled mb-0">
                   <%= turbo_stream_from current_user %>
                   <%= turbo_frame_tag "all_memberships_for_user" do %>
-                    <%= render partial: 'memberships/list_memberships_for_user', collection: @memberships_for_user, as: :membership %>
+                    <%= render partial: 'memberships/list_memberships_for_user', collection: memberships_for_user, as: :membership %>
                   <% end %>
                 </ul>
               </div>
@@ -49,10 +49,10 @@
           <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 170px); overflow-y: scroll;">
             <%= turbo_stream_from current_channel %>
             <%= turbo_frame_tag "all_messages" do %>
-              <%= render partial: 'messages/list_messages', collection: @messages, as: :message %>
+              <%= render partial: 'messages/list_messages', collection: messages_for_channel, as: :message %>
             <% end %>
           </div>
-          <% if @memberships.exists?(user_id: current_user.id) %>
+          <% if memberships_for_channel.exists?(user_id: current_user.id) %>
             <%= render 'messages/message_form', channel: current_channel, message: Message.new %>
           <% else %>
             <%= render 'messages/for_user_without_membership' %>
@@ -66,7 +66,7 @@
               <div data-mdb-perfect-scrollbar-init style="position: relative; height: calc(100vh - 150px); overflow-y: scroll;">
                 <ul class="list-unstyled mb-0">
                   <%= turbo_frame_tag "all_memberships" do %>
-                    <%= render partial: 'memberships/list_memberships', collection: @memberships, as: :membership %>
+                    <%= render partial: 'memberships/list_memberships', collection: memberships_for_channel, as: :membership %>
                   <% end %>
                 </ul>
               </div>
