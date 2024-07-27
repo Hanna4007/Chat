@@ -15,7 +15,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @users.each do |user| %>
+              <% users_for_admin.each do |user| %>
                 <tr>
                   <td><%= link_to "#{user.login}", admin_user_path(user.id) %></td>
                   <td><%= user.phone_number %></td>
@@ -34,9 +34,9 @@
           <h5 class="font-weight-bold mb-0 text-start">Channels</h5>
         </div>
         <div class="card-body flex-grow-1 overflow-auto">
-          <% if @channels.any? %>
+          <% if channels_for_user.any? %>
             <ul class="list-unstyled mb-0">
-              <% @channels.each do |channel| %>
+              <% channels_for_user.each do |channel| %>
                 <li class="mb-1"><%= channel.name %></li>
               <% end %>
             </ul>

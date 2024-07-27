@@ -6,7 +6,7 @@
           <h5 class="font-weight-bold mb-0 text-start">Channels</h5>
         </div>
         <div class="card-body flex-grow-1 overflow-auto">
-          <% @channels.each do |channel| %>
+          <% channels_for_admin.each do |channel| %>
             <p><%= link_to "#{channel.name}", admin_channel_path(channel.id) %></p>
           <% end %>
         </div>
@@ -28,7 +28,7 @@
               </tr>
             </thead>  
             <tbody>
-              <% @memberships.each do |membership| %>
+              <% members_for_channel.each do |membership| %>
                 <tr>
                   <td><%= membership.user.login %></td>
                   <td><%= membership.user.phone_number %></td>

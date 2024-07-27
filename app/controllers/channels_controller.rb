@@ -46,7 +46,7 @@ class ChannelsController < ApplicationController
   end
 
   helper_method def memberships_for_channel
-    current_channel.memberships
+    current_channel.memberships.includes(:user)
   end
 
   helper_method def messages_for_channel

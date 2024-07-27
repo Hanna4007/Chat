@@ -9,9 +9,18 @@ module Admin
     before_action :check_admin
 
     def show
-      @users = User.all
+      respond_with users_for_admin
+    end
+
+    private
+
+    helper_method def users_for_admin
+      User.all
+    end
+
+    helper_method def channels_for_user
       @user = User.find(params[:id])
-      @channels = @user.channels
+      @user.channels
     end
   end
 end
