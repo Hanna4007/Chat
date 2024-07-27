@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - 'db/migrate/**/*'
+    - 'db/**/*'
     - 'bin/bundle'
   DisplayCopNames: true
 

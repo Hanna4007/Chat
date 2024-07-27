@@ -3,10 +3,10 @@
 class ChannelsController < ApplicationController
   include Authentication
   include CurrentChannel
-  
+
   before_action :no_authentication
   before_action :current_channel, only: [:show]
-  
+
   def index
     memberships_for_user
     memberships_without_user
@@ -52,5 +52,4 @@ class ChannelsController < ApplicationController
   helper_method def messages_for_channel
     current_channel.messages.includes(:user)
   end
-
 end

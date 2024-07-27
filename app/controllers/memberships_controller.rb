@@ -3,7 +3,7 @@
 class MembershipsController < ApplicationController
   include Authentication
   include CurrentChannel
-  
+
   before_action :no_authentication
   before_action :current_channel, only: %i[create destroy]
 
